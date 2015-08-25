@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="GitUserSearch">
   <head>
     <meta charset="utf-8">
     <title>Github user search</title>
@@ -8,22 +8,20 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/gitUserSearchController.js"></script>
+
   </head>
 
-  <body ng-app="GitUserSearch">
+  <body ng-controller='GitUserSearchController as searchCtrl'>
     <div>
       <form class="form-horizontal">
         <input type="text" >
-        <button class="btn">Search</button>
+        <button class="btn" ng-click="searchCtrl.doSearch()">Search</button>
       </form>
-      <ul class="list-group">
+      <ul class="list-group" ng-repeat='user in searchCtrl.searchResult.items'>
         <li class="list-group-item">
-          <img src="https://avatars2.githubusercontent.com/u/9342866?v=3&s=70">
-          <a href="https://github.com/ptolemybarnes">ptolemybarnes</a>
-        </li>
-        <li class="list-group-item">
-          <img src="https://avatars.githubusercontent.com/u/30216?v=3&s=70">
-          <a href="https://github.com/tansaku">tansaku</a>
+          <img ng-src="{{user.avatar_url}}&s=50"></img>
+          <a ng-href="{{user.html_url}}">ptolemybarnes</a>
         </li>
       </ul>
     </div>
