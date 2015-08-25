@@ -1,36 +1,46 @@
 describe('GitUserSearchController', function() {
   beforeEach(module('GitUserSearch'));
-
   var ctrl;
-
-  beforeEach(inject(function($controller) {
-    ctrl = $controller('GitUserSearchController');
-  }));
   
-  it('initialises with an empty search result and term', function() {
-    expect(ctrl.searchResult).toBeUndefined();
-    expect(ctrl.searchTerm)  .toBeUndefined();
-  });
-
   describe('when user searching for a user', function() {
+    beforeEach(module('GitUserSearch'));
+    var httpBackend;
+    var ctrl;
+    var fakeUserInfo;
+    var scope;
+
+    beforeEach(function(){
+      module(function ($provide) {
+       fakeSearch = jasmine.createSpyObj('fakeSearch', ['query']); // here we create and inject a fakeService with a 'query' property
+        $provide.factory('Search', function(){
+          return fakeSearch;
+        });
+      });
+    });
+   
     var items = [
       {
         "login": "tansaku",
         "avatar_url": "https://avatars.githubusercontent.com/u/30216?v=3",
         "html_url": "https://github.com/tansaku"
-      }, 
-      {
-        "login": "stephenlloyd",
-        "avatar_url": "https://avatars.githubusercontent.com/u/196474?v=3",
-        "html_url": "https://github.com/stephenlloyd"
       }
     ];
-
-    it('displays search results', function() {
+    
+    beforeEach(inject(function ($q, $rootScope) {
+      scope = $rootScope;
+      fakeSearch.query.and.returnValue($q.when({ data: items }))
+    }));
+    
+    beforeEach(inject(function($controller) {
+      ctrl = $controller('GitUserSearchController');
+    }));
+    
+    it("displays search results", function() {
+      ctrl.searchTerm = 'tansaku';
       ctrl.doSearch();
-      expect(ctrl.searchResult.items).toEqual(items);
+      scope.$apply();
+      expect(ctrl.searchResult).toEqual(items);
     });
   });
-
 });
 
