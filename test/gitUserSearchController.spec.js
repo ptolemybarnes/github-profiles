@@ -3,9 +3,6 @@ describe('GitUserSearchController', function() {
   var ctrl;
   
   describe('when user searching for a user', function() {
-    beforeEach(module('GitUserSearch'));
-    var httpBackend;
-    var ctrl;
     var fakeUserInfo;
     var scope;
 
@@ -28,7 +25,7 @@ describe('GitUserSearchController', function() {
     
     beforeEach(inject(function ($q, $rootScope) {
       scope = $rootScope;
-      fakeSearch.query.and.returnValue($q.when({ data: items }))
+      fakeSearch.query.and.returnValue($q.when({ data: items }));
     }));
     
     beforeEach(inject(function($controller) {
