@@ -1,4 +1,8 @@
+var mock = require('protractor-http-mock');
+mock(['githubUserSearch.js']);
+
 describe('GitHub profile finder', function() {
+
   it('finds profiles', function() {
     browser.get('http://localhost:8080');
 
@@ -8,4 +12,9 @@ describe('GitHub profile finder', function() {
     expect(element(by.binding('user.login')).getText()).
         toEqual('ptolemybarnes');
   });
+
+  afterEach(function(){
+    mock.teardown();
+  });
+
 });
