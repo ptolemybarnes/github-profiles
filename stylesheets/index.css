@@ -1,0 +1,5 @@
+li.list-group-item {
+  float: left;
+  width: 20%;
+  background: rgb(95, 95, 95);
+}

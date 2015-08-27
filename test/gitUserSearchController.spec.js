@@ -8,7 +8,7 @@ describe('GitUserSearchController', function() {
 
     beforeEach(function(){
       module(function ($provide) {
-       fakeSearch = jasmine.createSpyObj('fakeSearch', ['query']); // here we create and inject a fakeService with a 'query' property
+        fakeSearch = jasmine.createSpyObj('fakeSearch', ['query']); // here we create and inject a fakeService with a 'query' property
         $provide.factory('Search', function(){
           return fakeSearch;
         });
@@ -40,4 +40,3 @@ describe('GitUserSearchController', function() {
     });
   });
 });
-
