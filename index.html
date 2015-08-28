@@ -24,6 +24,7 @@
         <li class="list-group-item" ng-repeat='user in searchCtrl.searchResult.items'>
           <img ng-src="{{user.avatar_url}}&s=50" height='50' width='50'></img>
           <a ng-href="{{user.html_url}}">{{user.login}}</a>
+          <p>{{user.repoCount}}</p>
         </li>
       </ul>
     </div>

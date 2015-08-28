@@ -15,28 +15,39 @@ describe('GitUserSearchController', function() {
       });
     });
    
-    var items = [
+    var gitHubSearchResponse = [
       {
-        "login": "tansaku",
+        "login"     : "tansaku",
         "avatar_url": "https://avatars.githubusercontent.com/u/30216?v=3",
-        "html_url": "https://github.com/tansaku"
+        "html_url"  : "https://github.com/tansaku"
       }
     ];
+
+    var mockUserData = JSON.parse(JSON.stringify(gitHubSearchResponse)); 
     
     beforeEach(inject(function ($q, $rootScope) {
       scope = $rootScope;
-      fakeSearch.query.and.returnValue($q.when({ data: items }));
+      fakeSearch.query.and.returnValue($q.when({ data: gitHubSearchResponse }));
     }));
     
     beforeEach(inject(function($controller) {
       ctrl = $controller('GitUserSearchController');
     }));
     
-    it("displays search results", function() {
+    it("returns user information based on search results", function() {
       ctrl.searchTerm = 'tansaku';
       ctrl.doSearch();
       scope.$apply();
-      expect(ctrl.searchResult).toEqual(items);
+      expect(ctrl.searchResult).toEqual(gitHubSearchResponse);
+    });
+
+    it("includes user repo count in user data", function() {
+      mockUserData.repoCount = 20;
+      ctrl.searchTerm = 'tansaku';
+      ctrl.doSearch();
+      scope.$apply();
+      ctrl.getUserRepoCount();
+      expect(ctrl.userData).toEqual(mockUserData);
     });
   });
 });
