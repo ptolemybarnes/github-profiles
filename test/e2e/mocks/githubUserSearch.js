@@ -1,4 +1,5 @@
-module.exports = {
+module.exports = [
+{
   request: {
              path: 'https://api.github.com/search/users',
              method: 'GET'
@@ -171,4 +172,15 @@ module.exports = {
       ]
       }
       }
+},
+{
+  request: {
+             path: 'https://api.github.com/users/ptolemybarnes/repos',
+             method: 'GET'
+           },
+  response: { 
+          data: [{},{},{},{}]
+            }
+            
 }
+]

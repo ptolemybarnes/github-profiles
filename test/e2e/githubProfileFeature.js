@@ -1,7 +1,10 @@
 var mock = require('protractor-http-mock');
-mock(['githubUserSearch.js']);
 
 describe('GitHub profile finder', function() {
+  
+  beforeEach(function() {
+    mock(['githubUserSearch.js']);
+  });
 
   it('displays profiles given a search', function() {
     browser.get('http://localhost:8080');
@@ -20,7 +23,7 @@ describe('GitHub profile finder', function() {
     element(by.className('btn')).click();
     
     expect(element(by.binding('user.repoCount')).getText()).
-        toEqual('30');
+        toEqual('4');
   });
 
   afterEach(function(){
