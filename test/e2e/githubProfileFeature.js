@@ -20,7 +20,7 @@ describe('GitHub profile finder', function() {
     element(by.className('btn')).click();
     
     expect(element(by.binding('user.repoCount')).getText()).
-        toEqual('10');
+        toEqual('30');
   });
 
   afterEach(function(){

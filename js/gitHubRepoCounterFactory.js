@@ -22,5 +22,4 @@ githubUserSearch.factory('RepoCounter', ['$http', function($http) {
     }
   }
 }]);
-          
 
