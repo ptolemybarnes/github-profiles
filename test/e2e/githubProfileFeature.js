@@ -3,7 +3,9 @@ var mock = require('protractor-http-mock');
 describe('GitHub profile finder', function() {
   
   beforeEach(function() {
-    mock(['githubUserSearch.js']);
+    function mock.useRecord('githubSearch', function() {
+      mock(['githubUserSearch.js']);
+    }
   });
 
   it('displays profiles given a search', function() {

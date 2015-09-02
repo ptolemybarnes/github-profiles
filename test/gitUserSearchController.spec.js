@@ -58,3 +58,4 @@ describe('GitUserSearchController', function() {
     });
   });
 });
+
