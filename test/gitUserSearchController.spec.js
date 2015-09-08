@@ -3,8 +3,7 @@ describe('GitUserSearchController', function() {
   var ctrl;
   
   describe('when user searching for a user', function() {
-    var fakeUserInfo;
-    var scope;
+    var fakeUserInfo, scope, fakeSearch, fakeCounter;
 
     beforeEach(function(){
       module(function ($provide) {
