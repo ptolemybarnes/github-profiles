@@ -42,7 +42,7 @@ describe('GitUserSearchController', function() {
       ctrl = $controller('GitUserSearchController');
     }));
     
-    it("includes user repo count in user data", function() {
+    it("includes user search results in user data", function() {
       ctrl.searchTerm = 'tansaku';
       ctrl.getGithubData();
       scope.$apply();
