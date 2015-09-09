@@ -1,20 +1,17 @@
 describe('GitUserSearchController', function() {
-  beforeEach(module('GitUserSearch'));
+  beforeEach(module('GitUserSearch')); // creating a mock module
   var ctrl;
   
   describe('when user searching for a user', function() {
     var fakeUserInfo, scope, fakeSearch, fakeCounter;
 
     beforeEach(function(){
-      module(function ($provide) {
-        fakeSearch  = jasmine.createSpyObj('fakeSearch',  ['query']); // here we create and inject a fakeService with a 'query' property
-        fakeCounter = jasmine.createSpyObj('fakeCounter', ['query']) 
-        $provide.factory('Search', function(){
-          return fakeSearch;
-        });
-        $provide.factory('RepoCounter', function(){
-          return fakeCounter;
-        });
+      fakeSearch  = jasmine.createSpyObj('fakeSearch',  ['query']);
+      fakeCounter = jasmine.createSpyObj('fakeCounter', ['query']) ;
+      
+      module({
+        Search:      fakeSearch,
+        RepoCounter: fakeCounter
       });
     });
    
@@ -30,14 +27,10 @@ describe('GitUserSearchController', function() {
 
     var mockUserData = JSON.parse(JSON.stringify(gitHubSearchResponse)); 
     
-    beforeEach(inject(function ($q, $rootScope) {
+    beforeEach(inject(function ($q, $rootScope, $controller) {
       scope = $rootScope;
       fakeSearch.query.and.returnValue($q.when( { data: gitHubSearchResponse }));
       fakeCounter.query.and.returnValue($q.when({ data: '20' }));
-
-    }));
-    
-    beforeEach(inject(function($controller) {
       ctrl = $controller('GitUserSearchController');
     }));
     
